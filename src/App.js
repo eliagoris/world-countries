@@ -26,7 +26,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a {
-      text-decoration: none
+    color: #363636;
+    text-decoration: none
+  }
+
+  h1,h2 {
+    color: #1d1d1d;
   }
   
 `

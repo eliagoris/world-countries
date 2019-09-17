@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import { NavLink } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 const StyledHeader = styled.header`
   display: flex;
@@ -13,10 +13,10 @@ const StyledHeader = styled.header`
 
 const Title = styled.h1`
   margin: 0;
-  padding: 0 1em;
+  padding: 0 2em 0 1em;
   border-right: 2px solid #f8f8f9;
   font-size: 1.5em;
-  color: #004cff;
+  color: #1b5e20;
 `
 
 const StyledNavLink = styled(NavLink)`
@@ -25,9 +25,12 @@ const StyledNavLink = styled(NavLink)`
   border-bottom: 2px solid transparent;
   color: #363636;
   cursor: pointer;
+  transition: color 0.2s linear, opacity .2s linear;
 
-  &.active {
-    border-color: #004cff;
+  &.active,
+  &:hover {
+    opacity: .8
+    color: #1b5e20;
   }
 `
 
@@ -36,9 +39,23 @@ const Navigation = styled.nav`
   padding: 0 2em;
 `
 
+const StyledLink = () => (
+  <StyledNavLink
+    as={styled(Link)`
+      margin: 0;
+      color: #1b5e20;
+    `}
+    to="/"
+  >
+    Countries
+  </StyledNavLink>
+)
+
 const Header = () => (
   <StyledHeader>
-    <Title>Countries</Title>
+    <Title>
+      <StyledLink />
+    </Title>
     <Navigation>
       <StyledNavLink to="/" exact>
         Home

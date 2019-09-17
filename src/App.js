@@ -32,10 +32,9 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none
   }
 
-  h1,h2 {
+  h1, h2, h3 {
     color: #1d1d1d;
   }
-  
 `
 
 const client = new ApolloClient({

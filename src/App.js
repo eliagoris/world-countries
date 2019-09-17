@@ -1,9 +1,7 @@
 import React, { Fragment } from "react"
 import { createGlobalStyle } from "styled-components"
-import styled from "styled-components"
 
 import AppRouter from "./routers/AppRouter"
-import Header from "./components/Header"
 import "normalize.css/normalize.css"
 
 const GlobalStyle = createGlobalStyle`
@@ -33,19 +31,10 @@ const GlobalStyle = createGlobalStyle`
   
 `
 
-const Container = styled.section`
-  max-width: 60em;
-  margin: 2em auto;
-  padding: 4em;
-`
-
 const App = () => (
   <Fragment>
     <GlobalStyle />
-    <Header />
-    <Container>
-      <AppRouter />
-    </Container>
+    <AppRouter />
   </Fragment>
 )
 

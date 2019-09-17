@@ -1,5 +1,7 @@
 import React, { Fragment } from "react"
 import { createGlobalStyle } from "styled-components"
+import ApolloClient from "apollo-boost"
+import { ApolloProvider } from "@apollo/react-hooks"
 
 import AppRouter from "./routers/AppRouter"
 import "normalize.css/normalize.css"
@@ -36,10 +38,16 @@ const GlobalStyle = createGlobalStyle`
   
 `
 
+const client = new ApolloClient({
+  uri: "https://countries.trevorblades.com/"
+})
+
 const App = () => (
   <Fragment>
     <GlobalStyle />
-    <AppRouter />
+    <ApolloProvider client={client}>
+      <AppRouter />
+    </ApolloProvider>
   </Fragment>
 )
 

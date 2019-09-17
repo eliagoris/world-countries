@@ -1,5 +1,7 @@
 import React from "react"
 
-const App = () => <p>this is the app</p>
+import AppRouter from "./routers/AppRouter"
+
+const App = () => <AppRouter />
 
 export default App

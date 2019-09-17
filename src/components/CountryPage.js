@@ -8,7 +8,6 @@ const CountryPage = ({
   }
 }) => (
   <div>
-    <Link to="/">back to home</Link>
     <p>this is the country of code {code}</p>
   </div>
 )

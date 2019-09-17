@@ -1,6 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
 
-const HomePage = () => <Link to="/countries">countries</Link>
+const HomePage = () => <h2>This is the HomePage</h2>
 
 export default HomePage

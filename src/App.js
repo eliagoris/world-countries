@@ -21,6 +21,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
   }
 
+  html, body, #root {
+    height: 100%;
+  }
+
   ul {
     list-style: none;
     margin: 0;

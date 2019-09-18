@@ -9,9 +9,10 @@ import CountryPage from "../components/CountryPage"
 import ErrorPage from "../components/ErrorPage"
 
 const Container = styled.section`
-  max-width: 90em;
+  max-width: 60em;
   margin: 0 auto;
-  padding: 2em 4em;
+  padding: 1em 1.5em;
+  height: 100%;
 `
 
 const AppRouter = () => (

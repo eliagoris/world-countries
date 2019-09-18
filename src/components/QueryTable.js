@@ -64,7 +64,11 @@ const renderTableHeader = (propertiesKeys, properties) => (
       const currentProperty = properties[propertyKey]
       const { width, title } = currentProperty
 
-      return <HeaderTableCell width={width}>{title}</HeaderTableCell>
+      return (
+        <HeaderTableCell key={propertyKey} width={width}>
+          {title}
+        </HeaderTableCell>
+      )
     })}
   </HeaderTableRow>
 )
@@ -98,7 +102,7 @@ const QueryTable = ({ schema: { properties }, query }) => {
                 const { width, renderCell } = currentProperty
 
                 return (
-                  <TableCell width={width}>
+                  <TableCell key={property} width={width}>
                     {renderCell
                       ? renderCell(queryContent)
                       : queryContent[property]}

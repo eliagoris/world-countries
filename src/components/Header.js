@@ -1,13 +1,17 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import { Link, NavLink } from "react-router-dom"
+
+import routes from "../routers/routes.json"
 
 const StyledHeader = styled.header`
   display: flex;
   width: 100%;
   position: sticky;
+  top: 0;
   height: 70px;
   border-bottom: 2px solid #f8f8f9;
+  background: #fff;
   line-height: 70px;
 `
 
@@ -35,8 +39,13 @@ const StyledNavLink = styled(NavLink)`
 `
 
 const Navigation = styled.nav`
+  display: none;
   flex: 1 auto;
   padding: 0 2em;
+
+  @media (min-width: 60em) {
+    display: block;
+  }
 `
 
 const StyledLink = () => (
@@ -51,20 +60,111 @@ const StyledLink = () => (
   </StyledNavLink>
 )
 
-const Header = () => (
-  <StyledHeader>
-    <Title>
-      <StyledLink />
-    </Title>
-    <Navigation>
-      <StyledNavLink to="/" exact>
-        Home
-      </StyledNavLink>
-      <StyledNavLink to="/countries" exact>
-        Countries list
-      </StyledNavLink>
-    </Navigation>
-  </StyledHeader>
-)
+const MenuToggleBar = styled.span`
+  display: block;
+  width: 24px;
+  height: 2px;
+  margin: 5px 0;
+  background: #868e96;
+`
+
+const MenuToggle = styled.span`
+  margin: 0 10px;
+  cursor: pointer;
+`
+
+const MobileIcons = styled.div`
+  display: flex;
+  flex: 1 1 auto;
+  padding: 0 25px;
+  align-items: center;
+  justify-content: flex-end;
+
+  @media (min-width: 60em) {
+    display: none;
+  }
+`
+const MobileMenu = styled.div`
+  position: fixed;
+  visibility: hidden;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 100vh;
+  padding: 1.5em 2em;
+  line-height: 1em;
+  background: #fff;
+  opacity: 0;
+  -webkit-transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    visibility 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: opacity 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    visibility 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  &.active {
+    visibility: visible;
+    opacity: 1;
+  }
+`
+
+const MobileNavLink = styled(StyledNavLink)`
+  display: block;
+  text-align: center;
+`
+
+const MenuCloseIcon = styled.span`
+  display: block;
+  width: 100%;
+  text-align: right;
+`
+
+const Header = () => {
+  const [isMobileMenuActive, setMobileMenuActive] = useState(false)
+  return (
+    <StyledHeader>
+      <Title>
+        <StyledLink />
+      </Title>
+
+      <Navigation>
+        {routes.map(({ title, path }) => (
+          <StyledNavLink to={path} exact>
+            {title}
+          </StyledNavLink>
+        ))}
+      </Navigation>
+
+      <MobileIcons>
+        <MenuToggle onClick={() => setMobileMenuActive(true)}>
+          <MenuToggleBar />
+          <MenuToggleBar />
+          <MenuToggleBar />
+        </MenuToggle>
+      </MobileIcons>
+
+      <MobileMenu className={`${isMobileMenuActive ? "active" : ""}`}>
+        <MenuCloseIcon onClick={() => setMobileMenuActive(false)}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
+            <path
+              d="M12.7 12.2l-12 12 12-12 12 12-12-12zm0 0l12-12-12 12L.7.2l12 12z"
+              stroke="#979797"
+              strokeWidth="2"
+              fill="none"
+              fillRule="evenodd"
+            ></path>
+          </svg>
+        </MenuCloseIcon>
+
+        {routes.map(({ title, path }) => (
+          <MobileNavLink
+            onClick={() => setMobileMenuActive(false)}
+            to={path}
+            exact
+          >
+            {title}
+          </MobileNavLink>
+        ))}
+      </MobileMenu>
+    </StyledHeader>
+  )
+}
 
 export default Header

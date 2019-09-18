@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Home",
+    "path": "/",
+    "exact": true,
+    "component": "HomePage"
+  },
+  {
+    "title": "Countries list",
+    "path": "/countries",
+    "exact": true,
+    "component": "CountriesListPage"
+  }
+]

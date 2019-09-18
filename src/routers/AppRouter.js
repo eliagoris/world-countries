@@ -7,6 +7,7 @@ import HomePage from "../components/HomePage"
 import CountriesListPage from "../components/CountriesListPage"
 import CountryPage from "../components/CountryPage"
 import ErrorPage from "../components/ErrorPage"
+import routes from "./routes.json"
 
 const Container = styled.section`
   max-width: 60em;
@@ -15,16 +16,26 @@ const Container = styled.section`
   height: 100%;
 `
 
+const componentRegistry = {
+  HomePage,
+  CountriesListPage,
+  CountryPage,
+  ErrorPage
+}
+
 const AppRouter = () => (
   <BrowserRouter>
     <Header />
 
     <Container>
       <Switch>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/countries" exact component={CountriesListPage} />
-        <Route path="/countries/:code" component={CountryPage} />
-        <Route component={ErrorPage} />
+        {routes.map(({ path, exact, component }) => (
+          <Route
+            path={path}
+            exact={exact}
+            component={componentRegistry[component]}
+          />
+        ))}
       </Switch>
     </Container>
   </BrowserRouter>

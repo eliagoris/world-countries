@@ -30,7 +30,7 @@ const schema = {
         languages.map(({ name, native }) => (
           <StyledParagraph key={name}>
             {name} <br />
-            Native: <b>{native}</b>
+            Native: {native}
           </StyledParagraph>
         ))
     },

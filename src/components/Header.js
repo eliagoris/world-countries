@@ -125,8 +125,8 @@ const Header = () => {
       </Title>
 
       <Navigation>
-        {routes.map(({ title, path }) => (
-          <StyledNavLink to={path} exact>
+        {routes.map(({ title, path }, index) => (
+          <StyledNavLink key={index} to={path} exact>
             {title}
           </StyledNavLink>
         ))}
@@ -153,8 +153,9 @@ const Header = () => {
           </svg>
         </MenuCloseIcon>
 
-        {routes.map(({ title, path }) => (
+        {routes.map(({ title, path }, index) => (
           <MobileNavLink
+            key={index}
             onClick={() => setMobileMenuActive(false)}
             to={path}
             exact

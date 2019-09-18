@@ -29,8 +29,9 @@ const AppRouter = () => (
 
     <Container>
       <Switch>
-        {routes.map(({ path, exact, component }) => (
+        {routes.map(({ path, exact, component }, index) => (
           <Route
+            key={index}
             path={path}
             exact={exact}
             component={componentRegistry[component]}

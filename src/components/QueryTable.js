@@ -52,6 +52,12 @@ const TableContent = styled.div`
   overflow-y: overlay;
 `
 
+/**
+ * Renders the table header based on schema properties
+ *
+ * @param {Array} propertiesKeys The array of properties keys for accessing properties contents
+ * @param {Object} properties The schema properties object for defining header elements
+ */
 const renderTableHeader = (propertiesKeys, properties) => (
   <HeaderTableRow>
     {propertiesKeys.map(propertyKey => {
@@ -63,6 +69,12 @@ const renderTableHeader = (propertiesKeys, properties) => (
   </HeaderTableRow>
 )
 
+/**
+ * Component responsible for rendering a listing table
+ *
+ * @param {Object} schema The JSON schema what will be used for defining the table structure
+ * @param {Object} query The query used for getting and populating data
+ */
 const QueryTable = ({ schema: { properties }, query }) => {
   const { loading, error, data } = useQuery(query.value)
 

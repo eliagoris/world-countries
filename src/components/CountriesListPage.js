@@ -1,99 +1,67 @@
 import React from "react"
-import { useQuery } from "@apollo/react-hooks"
 import styled from "styled-components"
 
-import LoadingIcon from "./LoadingIcon"
+import QueryTable from "./QueryTable"
+
 import { GET_COUNTRIES_QUERY } from "../queries/countries"
-
-const Table = styled.div`
-  padding: 1em;
-  border: 1px solid #e3e4e6;
-`
-
-const TableRow = styled.div`
-  display: flex;
-
-  &:not(:last-child) {
-    border-bottom: 1px solid #e3e4e6;
-  }
-
-  &:hover {
-    background: #f7f9fa;
-    cursor: pointer;
-    color: #1b5e20;
-  }
-`
-
-const TableCell = styled.span`
-  flex: 1 ${props => props.width};
-  padding: 0.5em;
-
-  font-size: 0.8em;
-`
 
 const StyledParagraph = styled.p`
   margin: 0 0 0.5em 0;
 `
 
-const HeaderTableRow = styled(TableRow)`
-  &:hover {
-    background: initial;
-    color: initial;
-    cursor: auto;
+/**
+ * JSON Schema for defining table properties
+ */
+const schema = {
+  properties: {
+    name: {
+      title: "Name",
+      width: "40%"
+    },
+    languages: {
+      title: "Languages",
+      width: "40%",
+      /**
+       * Function that receives data from query and renders the table cell content accordingly
+       *
+       * @param {Object} Data The data returned from GraphQL query
+       */
+      renderCell: ({ languages }) =>
+        languages.map(({ name, native }) => (
+          <StyledParagraph key={name}>
+            {name} <br />
+            Native: <b>{native}</b>
+          </StyledParagraph>
+        ))
+    },
+    continent: {
+      title: "Continent",
+      width: "20%",
+      /**
+       * Function that receives data from query and renders the table cell content accordingly
+       *
+       * @param {Object} Data The data returned from GraphQL query
+       */
+      renderCell: ({ continent }) => continent.code
+    }
   }
-`
+}
 
-const HeaderTableCell = styled(TableCell)`
-  color: #a0a1a2;
-`
+const query = {
+  /** Name will be used for accessing query response */
+  name: "countries",
+  /** Value is the GraphQL query */
+  value: GET_COUNTRIES_QUERY
+}
 
-const LoadingContainer = styled.div`
-  padding: 4em 0.5em;
-  text-align: center;
-`
-
-const TableContent = styled.div`
-  max-height: 40em;
-  overflow-y: overlay;
-`
-
+/**
+ * Component responsible for rendering the list of countries
+ */
 const CountriesListPage = () => {
-  const { loading, error, data } = useQuery(GET_COUNTRIES_QUERY)
-
-  if (error) return <p>Unfortunately, an error occured. Please try again</p>
-
   return (
     <div>
       <h3>Countries listing</h3>
-      <Table>
-        <HeaderTableRow>
-          <HeaderTableCell width={"40%"}>Name</HeaderTableCell>
-          <HeaderTableCell width={"40%"}>Languages</HeaderTableCell>
-          <HeaderTableCell width={"20%"}>Continent</HeaderTableCell>
-        </HeaderTableRow>
-        {loading ? (
-          <LoadingContainer>
-            <LoadingIcon color="#1b5e20" />
-          </LoadingContainer>
-        ) : (
-          <TableContent>
-            {data.countries.map(({ name, languages, continent }) => (
-              <TableRow key={name}>
-                <TableCell width={"40%"}>{name}</TableCell>
-                <TableCell width={"40%"}>
-                  {languages.map(language => (
-                    <StyledParagraph key={language.name}>
-                      {language.name} <br />
-                      Native: <b>{language.native}</b>
-                    </StyledParagraph>
-                  ))}
-                </TableCell>
-                <TableCell width={"20%"}>{continent.code}</TableCell>
-              </TableRow>
-            ))}
-          </TableContent>
-        )}
-      </Table>
+      <QueryTable query={query} schema={schema} />
     </div>
   )
 }

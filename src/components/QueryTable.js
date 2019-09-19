@@ -42,11 +42,6 @@ const HeaderTableCell = styled(TableCell)`
   color: #a0a1a2;
 `
 
-const LoadingContainer = styled.div`
-  padding: 4em 0.5em;
-  text-align: center;
-`
-
 const TableContent = styled.div`
   max-height: 40em;
   overflow-y: overlay;
@@ -88,9 +83,7 @@ const QueryTable = ({ schema: { properties }, query }) => {
     <Table>
       {renderTableHeader(propertiesKeys, properties)}
       {loading ? (
-        <LoadingContainer>
-          <LoadingIcon color="#1b5e20" />
-        </LoadingContainer>
+        <LoadingIcon color="#1b5e20" />
       ) : error ? (
         <p>An error occured. Please try again</p>
       ) : (

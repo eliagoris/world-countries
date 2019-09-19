@@ -10,5 +10,11 @@
     "path": "/countries",
     "exact": true,
     "component": "CountriesListPage"
+  },
+  {
+    "title": "Country",
+    "path": "/countries/:code",
+    "exact": true,
+    "component": "CountryPage"
   }
 ]

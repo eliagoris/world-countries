@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 import QueryTable from "./QueryTable"
 
-import { GET_COUNTRIES_QUERY } from "../queries/countries"
+import { GET_COUNTRIES } from "../queries/countries"
 
 const StyledParagraph = styled.p`
   margin: 0 0 0.5em 0;
@@ -51,7 +51,7 @@ const query = {
   /** Name will be used for accessing query response */
   name: "countries",
   /** Value is the GraphQL query */
-  value: GET_COUNTRIES_QUERY
+  value: GET_COUNTRIES
 }
 
 /**

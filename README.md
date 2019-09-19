@@ -1,3 +1,9 @@
+# scoutbase-frontend-challenge
+
+:package: Used stack: React, NextJS, ApolloGraphQL, Styled-Components
+
+:white_check_mark: Status: finished 
+
 # Code Challenge for Scoutbase
 
 If you’re reading this, then you’ve applied for a position at Scoutbase.

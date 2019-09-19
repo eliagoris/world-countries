@@ -1,10 +1,11 @@
 import React, { Fragment } from "react"
 import { createGlobalStyle } from "styled-components"
-import ApolloClient from "apollo-boost"
+import ApolloClient, { InMemoryCache } from "apollo-boost"
 import { ApolloProvider } from "@apollo/react-hooks"
+import fetch from "node-fetch"
+import { createHttpLink } from "apollo-link-http"
 
-import AppRouter from "./routers/AppRouter"
-import "normalize.css/normalize.css"
+import AppRouter from "../routers/AppRouter"
 
 const GlobalStyle = createGlobalStyle`
 @font-face {
@@ -45,8 +46,9 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+const link = createHttpLink({ uri: "/graphql", fetch: fetch })
 const client = new ApolloClient({
-  uri: "https://countries.trevorblades.com/"
+  link
 })
 
 const App = () => (

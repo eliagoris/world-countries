@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react"
 import styled from "styled-components"
-import { Redirect } from "react-router"
+import { useRouter } from "next/router"
 
 import QueryTable from "./QueryTable"
 import Layout from "./Layout"
@@ -61,6 +61,8 @@ const query = {
 const CountriesListPage = () => {
   const [redirectToCode, setRedirectToCode] = useState(false)
 
+  const router = useRouter()
+
   /**
    * Will be called when clicking on a table row. Responsible for redirecting the user to a country page by it's code
    * @param {Object} data The data from query response
@@ -69,8 +71,7 @@ const CountriesListPage = () => {
     setRedirectToCode(code)
   }
 
-  if (redirectToCode)
-    return <Redirect push to={`/countries/${redirectToCode}`} />
+  if (redirectToCode) return router.push("/countries/" + redirectToCode)
 
   return (
     <Layout>

@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { Redirect } from "react-router"
 
 import QueryTable from "./QueryTable"
+import Layout from "./Layout"
 import { GET_COUNTRIES } from "../queries/countries"
 
 const StyledParagraph = styled.p`
@@ -72,7 +73,7 @@ const CountriesListPage = () => {
     return <Redirect push to={`/countries/${redirectToCode}`} />
 
   return (
-    <Fragment>
+    <Layout>
       <h2>World Countries</h2>
       <p>
         A list of world countries and the languages spoken in that country. Both
@@ -80,7 +81,7 @@ const CountriesListPage = () => {
         Also the continent it is located in
       </p>
       <QueryTable onRowClick={handleRowClick} query={query} schema={schema} />
-    </Fragment>
+    </Layout>
   )
 }
 

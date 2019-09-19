@@ -1,9 +1,8 @@
-import React, { useState } from "react"
+import React, { Fragment, useState } from "react"
 import styled from "styled-components"
 import { Redirect } from "react-router"
 
 import QueryTable from "./QueryTable"
-
 import { GET_COUNTRIES } from "../queries/countries"
 
 const StyledParagraph = styled.p`
@@ -49,9 +48,9 @@ const schema = {
 }
 
 const query = {
-  /** Name will be used for accessing query response */
+  /** name will be used for accessing query response */
   name: "countries",
-  /** Value is the GraphQL query */
+  /** value is the GraphQL query */
   value: GET_COUNTRIES
 }
 
@@ -69,13 +68,19 @@ const CountriesListPage = () => {
     setRedirectToCode(code)
   }
 
-  if (redirectToCode) return <Redirect to={`/countries/${redirectToCode}`} />
+  if (redirectToCode)
+    return <Redirect push to={`/countries/${redirectToCode}`} />
 
   return (
-    <div>
+    <Fragment>
       <h3>Countries listing</h3>
+      <p>
+        A list of countries and the languages spoken in that country. Both in
+        English and native languages. <br />
+        Also the continent it is located in
+      </p>
       <QueryTable onRowClick={handleRowClick} query={query} schema={schema} />
-    </div>
+    </Fragment>
   )
 }
 

@@ -32,8 +32,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    color: #363636;
     text-decoration: none
+  }
+
+  a, p {
+    color: #363636;
+    line-height: 1.5
   }
 
   h1, h2, h3 {

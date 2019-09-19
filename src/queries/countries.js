@@ -20,6 +20,8 @@ const GET_COUNTRY_BY_ID = gql`
   query country($code: String) {
     country(code: $code) {
       name
+      currency
+      phone
     }
   }
 `

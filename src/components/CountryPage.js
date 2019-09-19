@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Fragment } from "react"
 import { useQuery } from "@apollo/react-hooks"
 
 import LoadingIcon from "./LoadingIcon"
@@ -19,15 +19,19 @@ const CountryPage = ({
 
   const { country } = data
   return (
-    <div>
+    <Fragment>
       {error ? (
         <p>An error occured. Please try again</p>
       ) : country ? (
-        <h2>{country.name}</h2>
+        <Fragment>
+          <h2>{country.name}</h2>
+          <p>Currency: {country.currency}</p>
+          <p>Area code(phone): {country.phone}</p>
+        </Fragment>
       ) : (
         <p>No country were found with this code.</p>
       )}
-    </div>
+    </Fragment>
   )
 }
 export default CountryPage

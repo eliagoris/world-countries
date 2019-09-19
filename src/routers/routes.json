@@ -3,18 +3,21 @@
     "title": "Home",
     "path": "/",
     "exact": true,
-    "component": "HomePage"
+    "component": "HomePage",
+    "isNavigable": true
   },
   {
     "title": "Countries list",
     "path": "/countries",
     "exact": true,
-    "component": "CountriesListPage"
+    "component": "CountriesListPage",
+    "isNavigable": true
   },
   {
     "title": "Country",
     "path": "/countries/:code",
     "exact": true,
-    "component": "CountryPage"
+    "component": "CountryPage",
+    "isNavigable": false
   }
 ]

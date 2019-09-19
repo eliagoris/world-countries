@@ -1,11 +1,11 @@
-import React from "react"
+import React, { Fragment } from "react"
 import { Link } from "react-router-dom"
 
 const ErrorPage = () => (
-  <div>
+  <Fragment>
     <h1>404 - This page doesn't exist.</h1>
     <Link to="/">Go home</Link>
-  </div>
+  </Fragment>
 )
 
 export default ErrorPage

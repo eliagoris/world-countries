@@ -116,8 +116,11 @@ const MenuCloseIcon = styled.span`
   text-align: right;
 `
 
+const navigableRoutes = routes.filter(({ isNavigable }) => isNavigable)
+
 const Header = () => {
   const [isMobileMenuActive, setMobileMenuActive] = useState(false)
+
   return (
     <StyledHeader>
       <Title>
@@ -125,7 +128,7 @@ const Header = () => {
       </Title>
 
       <Navigation>
-        {routes.map(({ title, path }, index) => (
+        {navigableRoutes.map(({ title, path }, index, isNavigable) => (
           <StyledNavLink key={index} to={path} exact>
             {title}
           </StyledNavLink>
@@ -153,7 +156,7 @@ const Header = () => {
           </svg>
         </MenuCloseIcon>
 
-        {routes.map(({ title, path }, index) => (
+        {navigableRoutes.map(({ title, path }, index) => (
           <MobileNavLink
             key={index}
             onClick={() => setMobileMenuActive(false)}

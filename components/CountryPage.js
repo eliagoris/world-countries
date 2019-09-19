@@ -13,6 +13,16 @@ const StyledLink = styled.a`
   margin: 0.8em 0;
   color: #1b5e20;
 `
+const renderCountryInfos = ({ name, emoji, currency, phone, continent }) => (
+  <Fragment>
+    <h2>
+      {name} {emoji}
+    </h2>
+    <p>Currency: {currency}</p>
+    <p>Area code(phone): {phone}</p>
+    <p>Continent: {continent.name}</p>
+  </Fragment>
+)
 
 const CountryPage = () => {
   const router = useRouter()
@@ -26,19 +36,13 @@ const CountryPage = () => {
 
   return (
     <Layout>
+      <title>Country Page</title>
       {loading ? (
         <LoadingIcon color="#1b5e20" />
       ) : error ? (
         <p>An error occured. Please try again</p>
       ) : data.country ? (
-        <Fragment>
-          <h2>
-            {data.country.name} {data.country.emoji}
-          </h2>
-          <p>Currency: {data.country.currency}</p>
-          <p>Area code(phone): {data.country.phone}</p>
-          <p>Continent: {data.country.continent.name}</p>
-        </Fragment>
+        renderCountryInfos(data.country)
       ) : (
         <p>No country were found with this code.</p>
       )}

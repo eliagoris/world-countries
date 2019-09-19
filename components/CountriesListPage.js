@@ -68,10 +68,8 @@ const CountriesListPage = () => {
    * @param {Object} data The data from query response
    */
   const handleRowClick = ({ code }) => {
-    setRedirectToCode(code)
+    router.push("/countries/" + code)
   }
-
-  if (redirectToCode) return router.push("/countries/" + redirectToCode)
 
   return (
     <Layout>

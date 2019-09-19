@@ -1,10 +1,8 @@
 import React, { Fragment } from "react"
+import styled from "styled-components"
 import { createGlobalStyle } from "styled-components"
-import ApolloClient from "apollo-boost"
-import { ApolloProvider } from "@apollo/react-hooks"
 
-import AppRouter from "./routers/AppRouter"
-import "normalize.css/normalize.css"
+import Header from "../components/Header"
 
 const GlobalStyle = createGlobalStyle`
 @font-face {
@@ -18,6 +16,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    margin: 0;
     font-family: 'Roboto', sans-serif;
   }
 
@@ -32,7 +31,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    text-decoration: none
+    text-decoration: none;
+    cursor: pointer
   }
 
   a, p, span {
@@ -45,17 +45,20 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const client = new ApolloClient({
-  uri: "https://countries.trevorblades.com/"
-})
+const Container = styled.section`
+  max-width: 60em;
+  margin: 0 auto;
+  padding: 1em 1.5em;
+  height: 100%;
+`
 
-const App = () => (
+const Layout = ({ children }) => (
   <Fragment>
     <GlobalStyle />
-    <ApolloProvider client={client}>
-      <AppRouter />
-    </ApolloProvider>
+    <Header />
+
+    <Container>{children}</Container>
   </Fragment>
 )
 
-export default App
+export default Layout

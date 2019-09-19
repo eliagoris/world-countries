@@ -1,22 +1,28 @@
-import React, { Fragment } from "react"
-import { Link } from "react-router-dom"
+import React from "react"
+import Link from "next/link"
 import styled from "styled-components"
 
-const StyledLink = styled(Link)`
+import Layout from "./Layout"
+
+const StyledLink = styled.a`
   color: #1b5e20;
 `
 
 const HomePage = () => (
-  <Fragment>
+  <Layout>
+    <title>Countries Code Challenge</title>
     <h2>Countries</h2>
     <p>
       A country is not only a self-governed nation with its own authorities, but
       this status needs the international diplomatic recognition of sovereignty.
     </p>
     <p>
-      Check out our <StyledLink to="/countries">list of countries</StyledLink>
+      Check out our{" "}
+      <Link href="/countries">
+        <StyledLink>list of countries</StyledLink>
+      </Link>
     </p>
-  </Fragment>
+  </Layout>
 )
 
 export default HomePage

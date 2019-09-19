@@ -1,7 +1,9 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { Link, NavLink } from "react-router-dom"
+import Link from "next/link"
+import { useRouter } from "next/router"
 
+import ExitIcon from "./ExitIcon"
 import routes from "../routers/routes.json"
 
 const StyledHeader = styled.header`
@@ -23,17 +25,16 @@ const Title = styled.h1`
   color: #1b5e20;
 `
 
-const StyledNavLink = styled(NavLink)`
+const StyledNavLink = styled.a`
   padding: 0.5em;
   margin: 0 1em;
   border-bottom: 2px solid transparent;
-  color: #363636;
+  color: ${({ active }) => (active ? "#1b5e20;" : "#363636")};
   cursor: pointer;
-  transition: color 0.2s linear, opacity .2s linear;
+  transition: color 0.2s linear, opacity 0.2s linear;
 
-  &.active,
   &:hover {
-    opacity: .8
+    opacity: 0.8;
     color: #1b5e20;
   }
 `
@@ -48,17 +49,10 @@ const Navigation = styled.nav`
   }
 `
 
-const StyledLink = () => (
-  <StyledNavLink
-    as={styled(Link)`
-      margin: 0;
-      color: #1b5e20;
-    `}
-    to="/"
-  >
-    Countries
-  </StyledNavLink>
-)
+const StyledLink = styled(StyledNavLink)`
+  margin: 0;
+  color: #1b5e20;
+`
 
 const MenuToggleBar = styled.span`
   display: block;
@@ -116,22 +110,32 @@ const MenuCloseIcon = styled.span`
   text-align: right;
 `
 
-const navigableRoutes = routes.filter(({ isNavigable }) => isNavigable)
-
 const Header = () => {
   const [isMobileMenuActive, setMobileMenuActive] = useState(false)
+  const router = useRouter()
+
+  const ActiveLink = ({ children, ...props }) => {
+    const child = React.Children.only(children)
+    return (
+      <Link {...props}>
+        {React.cloneElement(child, { active: router.pathname === props.href })}
+      </Link>
+    )
+  }
 
   return (
     <StyledHeader>
       <Title>
-        <StyledLink />
+        <Link href="/">
+          <StyledLink>Countries</StyledLink>
+        </Link>
       </Title>
 
       <Navigation>
-        {navigableRoutes.map(({ title, path }, index, isNavigable) => (
-          <StyledNavLink key={index} to={path} exact>
-            {title}
-          </StyledNavLink>
+        {routes.map(({ title, path }, index) => (
+          <ActiveLink key={index} href={path}>
+            <StyledNavLink>{title}</StyledNavLink>
+          </ActiveLink>
         ))}
       </Navigation>
 
@@ -145,26 +149,15 @@ const Header = () => {
 
       <MobileMenu className={`${isMobileMenuActive ? "active" : ""}`}>
         <MenuCloseIcon onClick={() => setMobileMenuActive(false)}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-            <path
-              d="M12.7 12.2l-12 12 12-12 12 12-12-12zm0 0l12-12-12 12L.7.2l12 12z"
-              stroke="#979797"
-              strokeWidth="2"
-              fill="none"
-              fillRule="evenodd"
-            ></path>
-          </svg>
+          <ExitIcon />
         </MenuCloseIcon>
 
-        {navigableRoutes.map(({ title, path }, index) => (
-          <MobileNavLink
-            key={index}
-            onClick={() => setMobileMenuActive(false)}
-            to={path}
-            exact
-          >
-            {title}
-          </MobileNavLink>
+        {routes.map(({ title, path }, index) => (
+          <ActiveLink key={index} href={path}>
+            <MobileNavLink onClick={() => setMobileMenuActive(false)}>
+              {title}
+            </MobileNavLink>
+          </ActiveLink>
         ))}
       </MobileMenu>
     </StyledHeader>

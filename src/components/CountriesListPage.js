@@ -42,7 +42,7 @@ const schema = {
        *
        * @param {Object} Data The data returned from GraphQL query
        */
-      renderCell: ({ continent }) => continent.code
+      renderCell: ({ continent }) => continent.name
     }
   }
 }
@@ -73,10 +73,10 @@ const CountriesListPage = () => {
 
   return (
     <Fragment>
-      <h3>Countries listing</h3>
+      <h2>World Countries</h2>
       <p>
-        A list of countries and the languages spoken in that country. Both in
-        English and native languages. <br />
+        A list of world countries and the languages spoken in that country. Both
+        in English and native languages. <br />
         Also the continent it is located in
       </p>
       <QueryTable onRowClick={handleRowClick} query={query} schema={schema} />

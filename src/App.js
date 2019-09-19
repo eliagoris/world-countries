@@ -35,7 +35,7 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none
   }
 
-  a, p {
+  a, p, span {
     color: #363636;
     line-height: 1.5
   }

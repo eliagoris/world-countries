@@ -6,7 +6,7 @@ const GET_COUNTRIES = gql`
       code
       name
       continent {
-        code
+        name
       }
       languages {
         name
@@ -22,6 +22,10 @@ const GET_COUNTRY_BY_ID = gql`
       name
       currency
       phone
+      emoji
+      continent {
+        name
+      }
     }
   }
 `

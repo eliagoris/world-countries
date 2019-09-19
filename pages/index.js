@@ -1,3 +1,3 @@
-import App from "../components/App"
+import HomePage from "../components/HomePage"
 
-export default App
+export default HomePage

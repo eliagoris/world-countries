@@ -1,10 +1,7 @@
 import React, { Fragment } from "react"
 import styled from "styled-components"
-import { Switch, Route } from "react-router-dom"
 
 import Header from "../components/Header"
-import componentRegistry from "../libs/componentRegistry"
-import routes from "../routers/routes.json"
 
 const Container = styled.section`
   max-width: 60em;
@@ -13,22 +10,11 @@ const Container = styled.section`
   height: 100%;
 `
 
-const Layout = () => (
+const Layout = props => (
   <Fragment>
     <Header />
 
-    <Container>
-      <Switch>
-        {routes.map(({ path, exact, component }, index) => (
-          <Route
-            key={index}
-            path={path}
-            exact={exact}
-            component={componentRegistry[component]}
-          />
-        ))}
-      </Switch>
-    </Container>
+    <Container>{props.children}</Container>
   </Fragment>
 )
 

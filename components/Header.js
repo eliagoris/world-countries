@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import styled from "styled-components"
-import { Link, NavLink } from "react-router-dom"
+import Link from "next/link"
 
 import routes from "../routers/routes.json"
 
@@ -23,7 +23,7 @@ const Title = styled.h1`
   color: #1b5e20;
 `
 
-const StyledNavLink = styled(NavLink)`
+const StyledNavLink = styled.a`
   padding: 0.5em;
   margin: 0 1em;
   border-bottom: 2px solid transparent;
@@ -48,17 +48,10 @@ const Navigation = styled.nav`
   }
 `
 
-const StyledLink = () => (
-  <StyledNavLink
-    as={styled(Link)`
-      margin: 0;
-      color: #1b5e20;
-    `}
-    to="/"
-  >
-    Countries
-  </StyledNavLink>
-)
+const StyledLink = styled(StyledNavLink)`
+  margin: 0;
+  color: #1b5e20;
+`
 
 const MenuToggleBar = styled.span`
   display: block;
@@ -124,14 +117,14 @@ const Header = () => {
   return (
     <StyledHeader>
       <Title>
-        <StyledLink />
+        <StyledLink>Countries</StyledLink>
       </Title>
 
       <Navigation>
         {navigableRoutes.map(({ title, path }, index, isNavigable) => (
-          <StyledNavLink key={index} to={path} exact>
-            {title}
-          </StyledNavLink>
+          <Link key={index} href={path}>
+            <StyledNavLink>{title}</StyledNavLink>
+          </Link>
         ))}
       </Navigation>
 
@@ -157,14 +150,11 @@ const Header = () => {
         </MenuCloseIcon>
 
         {navigableRoutes.map(({ title, path }, index) => (
-          <MobileNavLink
-            key={index}
-            onClick={() => setMobileMenuActive(false)}
-            to={path}
-            exact
-          >
-            {title}
-          </MobileNavLink>
+          <Link key={index} href={path}>
+            <MobileNavLink onClick={() => setMobileMenuActive(false)}>
+              {title}
+            </MobileNavLink>
+          </Link>
         ))}
       </MobileMenu>
     </StyledHeader>

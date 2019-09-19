@@ -1,11 +1,12 @@
 import React, { Fragment } from "react"
 import { createGlobalStyle } from "styled-components"
-import ApolloClient, { InMemoryCache } from "apollo-boost"
+import { ApolloClient } from "apollo-client"
 import { ApolloProvider } from "@apollo/react-hooks"
 import fetch from "node-fetch"
 import { createHttpLink } from "apollo-link-http"
+import { InMemoryCache } from "apollo-cache-inmemory"
 
-import AppRouter from "../routers/AppRouter"
+import Layout from "../components/Layout"
 
 const GlobalStyle = createGlobalStyle`
 @font-face {
@@ -46,16 +47,21 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-const link = createHttpLink({ uri: "/graphql", fetch: fetch })
+const link = createHttpLink({
+  uri: "https://countries.trevorblades.com",
+  fetch: fetch
+})
+
 const client = new ApolloClient({
-  link
+  link,
+  cache: new InMemoryCache()
 })
 
 const App = () => (
   <Fragment>
     <GlobalStyle />
     <ApolloProvider client={client}>
-      <AppRouter />
+      <Layout />
     </ApolloProvider>
   </Fragment>
 )

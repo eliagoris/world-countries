@@ -1,10 +1,10 @@
-import React, { Fragment } from "react"
+import React from "react"
 import Link from "next/link"
 import styled from "styled-components"
 
 import Layout from "./Layout"
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   color: #1b5e20;
 `
 
@@ -16,7 +16,10 @@ const HomePage = () => (
       this status needs the international diplomatic recognition of sovereignty.
     </p>
     <p>
-      Check out our <StyledLink href="/countries">list of countries</StyledLink>
+      Check out our{" "}
+      <Link href="/">
+        <StyledLink>list of countries</StyledLink>
+      </Link>
     </p>
   </Layout>
 )

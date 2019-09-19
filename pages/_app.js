@@ -1,31 +1,19 @@
 import React from "react"
 import App from "next/app"
-
-import { ApolloClient } from "apollo-client"
 import { ApolloProvider } from "@apollo/react-hooks"
-import fetch from "isomorphic-fetch"
-import { createHttpLink } from "apollo-link-http"
-import { InMemoryCache } from "apollo-cache-inmemory"
 
-const link = createHttpLink({
-  uri: "https://countries.trevorblades.com",
-  fetch: fetch
-})
+import withApollo from "../lib/withApollo"
 
-const client = new ApolloClient({
-  link,
-  cache: new InMemoryCache()
-})
-
-class ApolloApp extends App {
+class ApolloProviderApp extends App {
   render() {
-    const { Component, pageProps } = this.props
+    const { Component, pageProps, apollo } = this.props
+
     return (
-      <ApolloProvider client={client}>
+      <ApolloProvider client={apollo}>
         <Component {...pageProps} />
       </ApolloProvider>
     )
   }
 }
 
-export default ApolloApp
+export default withApollo(ApolloProviderApp)

@@ -10,6 +10,7 @@ const StyledLink = styled.a`
 
 const HomePage = () => (
   <Layout>
+    <title>Countries Code Challenge</title>
     <h2>Countries</h2>
     <p>
       A country is not only a self-governed nation with its own authorities, but

@@ -3,6 +3,7 @@ import styled from "styled-components"
 import Link from "next/link"
 import { useRouter } from "next/router"
 
+import ExitIcon from "./ExitIcon"
 import routes from "../routers/routes.json"
 
 const StyledHeader = styled.header`
@@ -109,13 +110,11 @@ const MenuCloseIcon = styled.span`
   text-align: right;
 `
 
-const navigableRoutes = routes.filter(({ isNavigable }) => isNavigable)
-
 const Header = () => {
   const [isMobileMenuActive, setMobileMenuActive] = useState(false)
+  const router = useRouter()
 
   const ActiveLink = ({ children, ...props }) => {
-    const router = useRouter()
     const child = React.Children.only(children)
     return (
       <Link {...props}>
@@ -133,7 +132,7 @@ const Header = () => {
       </Title>
 
       <Navigation>
-        {navigableRoutes.map(({ title, path }, index) => (
+        {routes.map(({ title, path }, index) => (
           <ActiveLink key={index} href={path}>
             <StyledNavLink>{title}</StyledNavLink>
           </ActiveLink>
@@ -150,18 +149,10 @@ const Header = () => {
 
       <MobileMenu className={`${isMobileMenuActive ? "active" : ""}`}>
         <MenuCloseIcon onClick={() => setMobileMenuActive(false)}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
-            <path
-              d="M12.7 12.2l-12 12 12-12 12 12-12-12zm0 0l12-12-12 12L.7.2l12 12z"
-              stroke="#979797"
-              strokeWidth="2"
-              fill="none"
-              fillRule="evenodd"
-            ></path>
-          </svg>
+          <ExitIcon />
         </MenuCloseIcon>
 
-        {navigableRoutes.map(({ title, path }, index) => (
+        {routes.map(({ title, path }, index) => (
           <ActiveLink key={index} href={path}>
             <MobileNavLink onClick={() => setMobileMenuActive(false)}>
               {title}

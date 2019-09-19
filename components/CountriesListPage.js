@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react"
+import React from "react"
 import styled from "styled-components"
 import { useRouter } from "next/router"
 
@@ -59,8 +59,6 @@ const query = {
  * Component responsible for rendering the list of countries
  */
 const CountriesListPage = () => {
-  const [redirectToCode, setRedirectToCode] = useState(false)
-
   const router = useRouter()
 
   /**
@@ -73,6 +71,7 @@ const CountriesListPage = () => {
 
   return (
     <Layout>
+      <title>Countries Code Challenge - List</title>
       <h2>World Countries</h2>
       <p>
         A list of world countries and the languages spoken in that country. Both

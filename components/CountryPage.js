@@ -13,6 +13,7 @@ const StyledLink = styled.a`
   margin: 0.8em 0;
   color: #1b5e20;
 `
+
 const renderCountryInfos = ({ name, emoji, currency, phone, continent }) => (
   <Fragment>
     <h2>
@@ -36,7 +37,7 @@ const CountryPage = () => {
 
   return (
     <Layout>
-      <title>Country Page</title>
+      <title>Countries Code Challenge - Country Page</title>
       {loading ? (
         <LoadingIcon color="#1b5e20" />
       ) : error ? (

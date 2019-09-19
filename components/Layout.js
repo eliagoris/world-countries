@@ -52,12 +52,12 @@ const Container = styled.section`
   height: 100%;
 `
 
-const Layout = props => (
+const Layout = ({ children }) => (
   <Fragment>
     <GlobalStyle />
     <Header />
 
-    <Container>{props.children}</Container>
+    <Container>{children}</Container>
   </Fragment>
 )
 

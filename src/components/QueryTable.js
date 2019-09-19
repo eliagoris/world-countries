@@ -69,16 +69,16 @@ const renderTableHeader = (propertiesKeys, properties) => (
 )
 
 /**
- * Component responsible for rendering a listing table
+ * Component responsible for rendering a dynamic listing table based on a GraphQL query and a JSON schema
  *
  * @param {Object} schema The JSON schema what will be used for defining the table structure
  * @param {Object} query The query used for getting and populating data
+ * @param {Function} onRowClick The handler that will be called when clicking on a row
  */
-const QueryTable = ({ schema: { properties }, query }) => {
+const QueryTable = ({ schema: { properties }, query, onRowClick = false }) => {
   const { loading, error, data } = useQuery(query.value)
 
   const propertiesKeys = Object.keys(properties)
-
   return (
     <Table>
       {renderTableHeader(propertiesKeys, properties)}
@@ -89,7 +89,10 @@ const QueryTable = ({ schema: { properties }, query }) => {
       ) : (
         <TableContent>
           {data[query.name].map((queryContent, i) => (
-            <TableRow key={i}>
+            <TableRow
+              onClick={onRowClick ? () => onRowClick(queryContent) : () => true}
+              key={i}
+            >
               {propertiesKeys.map(property => {
                 const currentProperty = properties[property]
                 const { width, renderCell } = currentProperty

@@ -3,6 +3,7 @@ import { gql } from "apollo-boost"
 const GET_COUNTRIES = gql`
   query {
     countries {
+      code
       name
       continent {
         code

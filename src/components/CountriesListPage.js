@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
+import { Redirect } from "react-router"
 
 import QueryTable from "./QueryTable"
 
@@ -58,10 +59,22 @@ const query = {
  * Component responsible for rendering the list of countries
  */
 const CountriesListPage = () => {
+  const [redirectToCode, setRedirectToCode] = useState(false)
+
+  /**
+   * Will be called when clicking on a table row. Responsible for redirecting the user to a country page by it's code
+   * @param {Object} data The data from query response
+   */
+  const handleRowClick = ({ code }) => {
+    setRedirectToCode(code)
+  }
+
+  if (redirectToCode) return <Redirect to={`/countries/${redirectToCode}`} />
+
   return (
     <div>
       <h3>Countries listing</h3>
-      <QueryTable query={query} schema={schema} />
+      <QueryTable onRowClick={handleRowClick} query={query} schema={schema} />
     </div>
   )
 }

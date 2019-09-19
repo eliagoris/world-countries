@@ -17,7 +17,7 @@ const HomePage = () => (
     </p>
     <p>
       Check out our{" "}
-      <Link href="/">
+      <Link href="/countries">
         <StyledLink>list of countries</StyledLink>
       </Link>
     </p>

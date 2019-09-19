@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import Link from "next/link"
+import { useRouter } from "next/router"
 
 import routes from "../routers/routes.json"
 
@@ -27,13 +28,12 @@ const StyledNavLink = styled.a`
   padding: 0.5em;
   margin: 0 1em;
   border-bottom: 2px solid transparent;
-  color: #363636;
+  color: ${({ active }) => (active ? "#1b5e20;" : "#363636")};
   cursor: pointer;
-  transition: color 0.2s linear, opacity .2s linear;
+  transition: color 0.2s linear, opacity 0.2s linear;
 
-  &.active,
   &:hover {
-    opacity: .8
+    opacity: 0.8;
     color: #1b5e20;
   }
 `
@@ -114,17 +114,29 @@ const navigableRoutes = routes.filter(({ isNavigable }) => isNavigable)
 const Header = () => {
   const [isMobileMenuActive, setMobileMenuActive] = useState(false)
 
+  const ActiveLink = ({ children, ...props }) => {
+    const router = useRouter()
+    const child = React.Children.only(children)
+    return (
+      <Link {...props}>
+        {React.cloneElement(child, { active: router.pathname === props.href })}
+      </Link>
+    )
+  }
+
   return (
     <StyledHeader>
       <Title>
-        <StyledLink>Countries</StyledLink>
+        <Link href="/">
+          <StyledLink>Countries</StyledLink>
+        </Link>
       </Title>
 
       <Navigation>
-        {navigableRoutes.map(({ title, path }, index, isNavigable) => (
-          <Link key={index} href={path}>
+        {navigableRoutes.map(({ title, path }, index) => (
+          <ActiveLink key={index} href={path}>
             <StyledNavLink>{title}</StyledNavLink>
-          </Link>
+          </ActiveLink>
         ))}
       </Navigation>
 
@@ -150,11 +162,11 @@ const Header = () => {
         </MenuCloseIcon>
 
         {navigableRoutes.map(({ title, path }, index) => (
-          <Link key={index} href={path}>
+          <ActiveLink key={index} href={path}>
             <MobileNavLink onClick={() => setMobileMenuActive(false)}>
               {title}
             </MobileNavLink>
-          </Link>
+          </ActiveLink>
         ))}
       </MobileMenu>
     </StyledHeader>

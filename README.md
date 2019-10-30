@@ -1,4 +1,4 @@
-# react-data-ssr
+# world-countries
 
 React server side rendered application based on data
 

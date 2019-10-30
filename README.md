@@ -18,7 +18,7 @@ Built exclusively to learn and apply technologies involving the React library(re
 
 ## deployment
 
-This project was deployed using (Now)[http://now.sh/]
+This project was deployed using [http://now.sh/](Now)
 
 - Run `npm install -g now` to install Now
 
